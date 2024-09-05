@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedReady Home page</title>
+    <title>MedReady Home Page</title>
     <style>
         * {
             margin: 0;
@@ -73,14 +73,11 @@
             border: none;
             border-radius: 4px;
             width: 300px;
-            /* Increased width */
             height: 40px;
-            /* Set a consistent height */
         }
 
         .search-btn {
             padding: 0 16px;
-            /* Adjusted padding to fit better */
             border: none;
             background-color: #ffcc00;
             color: #333;
@@ -88,7 +85,6 @@
             margin-left: 5px;
             cursor: pointer;
             height: 40px;
-            /* Matching height with the input box */
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
@@ -97,25 +93,85 @@
             background-color: #ff9900;
         }
 
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-            }
+        /* Main Section */
+        .main-section {
+    height: 100vh; /* Ensures the section takes full viewport height */
+    background-image: url('doctor.jpg'); /* Background image */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents repetition */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-            .nav-links {
-                flex-direction: column;
-                margin-top: 10px;
-            }
 
-            .nav-links li {
-                margin: 5px 0;
-            }
+        .city-options {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .city-btn {
+            padding: 15px 30px;
+            background-color: #ffcc00;
+            color: #333;
+            text-decoration: none;
+            font-size: 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .city-btn:hover {
+            background-color: #ff9900;
+            transform: translateY(-5px);
+        }
+
+        /* Contact Us Section */
+        #contact {
+            background-color: #0073e6;
+            padding: 50px;
+            color: white;
+            text-align: center;
+        }
+
+        #contact h3 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        #contact p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #contact p span {
+            font-weight: bold;
+        }
+
+        /* Scroll to Contact Us */
+        .highlight {
+            background-color: #ffcc00 !important;
+            color: #333 !important;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #005bb5;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
+    <!-- Header / Navbar -->
     <header>
         <nav class="navbar">
             <div class="logo">
@@ -125,7 +181,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
                 <li class="search-container">
                     <input type="text" placeholder="Search...">
                     <button class="search-btn">Search</button>
@@ -133,6 +189,60 @@
             </ul>
         </nav>
     </header>
+
+    <!-- Main Section with City Selection -->
+    <section class="main-section" id="main-section">
+        <h2 style="color: white;">Select a City</h2>
+        <div class="city-options">
+            <a href="#" class="city-btn" data-city="hyderabad">Hyderabad</a>
+            <a href="#" class="city-btn" data-city="delhi">Delhi</a>
+            <a href="#" class="city-btn" data-city="chennai">Chennai</a>
+            <a href="#" class="city-btn" data-city="mumbai">Mumbai</a>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact">
+        <h3>Contact Us</h3>
+        <p>Email: <span>medready@example.com</span></p>
+        <p>Phone: <span>+91 12345 67890</span></p>
+        <p>&copy; 2024 MedReady. All rights reserved.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 MedReady. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth Scroll to Contact Us Section
+        document.querySelector('a[href="#contact"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('#contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            document.querySelector('#contact').classList.add('highlight');
+            setTimeout(function () {
+                document.querySelector('#contact').classList.remove('highlight');
+            }, 2000);
+        });
+
+        // Change background image on hover over city buttons
+        const cityButtons = document.querySelectorAll('.city-btn');
+        const mainSection = document.querySelector('.main-section');
+
+        cityButtons.forEach(button => {
+            button.addEventListener('mouseover', () => {
+                const city = button.getAttribute('data-city');
+                mainSection.style.backgroundImage = `url(${city}.jpg)`;
+            });
+
+            button.addEventListener('mouseout', () => {
+                mainSection.style.backgroundImage = 'url(doctor.jpg)'; // Revert to default
+            });
+        });
+    </script>
 </body>
 
 </html>
